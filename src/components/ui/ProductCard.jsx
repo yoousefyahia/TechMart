@@ -10,11 +10,14 @@ const ProductCard = memo(({ product }) => {
   const dispatch = useDispatch();
   const [showNotification, setShowNotification] = useState(false);
   
+  console.log('ProductCard render, showNotification:', showNotification);
+  
   const handleAddToCart = (e) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(addToCart(product));
     setShowNotification(true);
+    console.log('Product added to cart:', product.title);
   };
   
   return (

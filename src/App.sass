@@ -80,4 +80,22 @@ body, .App
   .navbar-toggler
     border-color: rgba($white, 0.5)
   .navbar-toggler-icon
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") 
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e")
+
+// Toast Styles for center positioning
+.toast-container
+  position: fixed !important
+  top: 50% !important
+  left: 50% !important
+  transform: translate(-50%, -50%) !important
+  z-index: 9999 !important
+  min-width: 350px !important
+  max-width: 90vw !important
+
+.toast
+  min-width: 350px
+  max-width: 90vw
+  text-align: center
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
+  border: none
+  border-radius: 8px 

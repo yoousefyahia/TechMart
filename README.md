@@ -1,6 +1,6 @@
 # 🛒 TechMart - Modern E-Commerce Store
 
-TechMart is a clean, modern e-commerce web application built with React. It features a streamlined shopping experience, a responsive design, and a maintainable codebase. The project is designed for learning, rapid prototyping, and as a solid foundation for real-world online stores.
+TechMart is a clean, modern e-commerce web application built with React and Vite. It features a streamlined shopping experience, a responsive design, and a maintainable codebase. The project is designed for learning, rapid prototyping, and as a solid foundation for real-world online stores.
 
 ## 📖 Project Overview
 
@@ -39,10 +39,16 @@ TechMart is a comprehensive e-commerce solution that demonstrates modern web dev
 ## 🛠️ Technologies & Tools
 
 ### Frontend Framework
-- **React 18+** – Modern UI library for building interactive interfaces
+- **React 19** – Modern UI library for building interactive interfaces
   - Functional components with hooks
   - Virtual DOM for efficient rendering
   - Component-based architecture
+
+### Build Tool
+- **Vite** – Next-generation frontend build tool
+  - Lightning-fast hot module replacement
+  - Optimized build process
+  - Modern development experience
 
 ### State Management
 - **Redux Toolkit** – State management for the shopping cart
@@ -66,47 +72,17 @@ TechMart is a comprehensive e-commerce solution that demonstrates modern web dev
   - Pre-built components (buttons, cards, modals)
   - Utility classes for styling
 
+### Styling
+- **SASS** – Advanced CSS preprocessor
+  - Variables and mixins for consistent styling
+  - Nested rules for better organization
+  - Advanced features like functions and operators
+
 ### HTTP Client
 - **Axios** – HTTP client for API requests
   - Promise-based API
   - Request/response interceptors
   - Automatic JSON parsing
-
-## 📁 Project Structure
-
-```
-src/
-├── layout/           # Navbar and shared layout components
-│   └── Navbar.js     # Main navigation component
-├── pages/            # Main application pages
-│   ├── HomePage.js   # Landing page with product grid
-│   ├── CartPage.js   # Shopping cart management
-│   ├── ProductDetail.js # Individual product view
-│   ├── CheckoutPage.js # Checkout process
-│   └── NotFound.js   # 404 error page
-├── features/         # Feature-specific logic
-│   └── cart/         # Cart-related functionality
-├── ui/               # Reusable UI components
-│   ├── ProductCard.js # Product display component
-│   └── Notification.js # User feedback components
-├── hooks/            # Custom React hooks
-│   └── useCart.js    # Cart state management
-├── utils/            # Utility functions
-│   └── helpers.js    # Common helper functions
-├── services/         # API and data fetching logic
-│   └── api.js        # API service functions
-├── types/            # Type definitions (if using TypeScript)
-├── assets/           # Images, logos, icons
-│   └── logo.png      # Application logo
-├── App.js            # Main app component
-├── App.css           # Global styles
-└── index.js          # Entry point
-public/
-├── logo.png          # App icon
-├── index.html        # HTML template
-├── manifest.json     # PWA manifest
-└── robots.txt        # SEO configuration
-```
 
 ## 🚀 Getting Started
 
@@ -130,7 +106,7 @@ public/
 
 3. **Start the development server:**
    ```bash
-   npm start
+   npm run dev
    ```
 
 4. **Open your browser:**
@@ -140,16 +116,13 @@ public/
 
 ```bash
 # Start development server
-npm start
-
-# Run tests
-npm test
+npm run dev
 
 # Build for production
 npm run build
 
-# Eject from Create React App (not recommended)
-npm run eject
+# Preview production build
+npm run preview
 ```
 
 ## 📦 Production Build
@@ -177,30 +150,15 @@ This creates a `build` folder with:
 Create a `.env` file in the root directory:
 
 ```env
-REACT_APP_API_URL=https://your-api-endpoint.com
-REACT_APP_STORAGE_KEY=techmart_cart
+VITE_API_URL=https://your-api-endpoint.com
+VITE_STORAGE_KEY=techmart_cart
 ```
 
 ### Customization
-- **Styling**: Modify `src/App.css` for global styles
+- **Styling**: Modify `src/App.sass` and `src/index.sass` for global styles
 - **Components**: Edit components in their respective folders
-- **Routing**: Update routes in `App.js`
+- **Routing**: Update routes in `App.jsx`
 - **State Management**: Modify Redux slices in `src/rtk/`
-
-## 🧪 Testing
-
-The project includes testing setup with Jest and React Testing Library:
-
-```bash
-# Run all tests
-npm test
-
-# Run tests in watch mode
-npm test -- --watch
-
-# Generate coverage report
-npm test -- --coverage
-```
 
 ## 📋 Planned Features
 
@@ -249,23 +207,24 @@ We welcome contributions! Here's how you can help:
 
 ### Common Issues
 
-**Port 3000 is already in use:**
+**Port already in use:**
 ```bash
-# Use a different port
-PORT=3001 npm start
+# Kill process on port 3000
+npx kill-port 3000
 ```
 
-**Build fails:**
+**Module not found errors:**
 ```bash
 # Clear cache and reinstall
 rm -rf node_modules package-lock.json
 npm install
 ```
 
-**Cart not persisting:**
-- Check browser localStorage
-- Verify Redux DevTools for state
-- Ensure cart slice is properly configured
+**Build errors:**
+```bash
+# Clear build cache
+npm run build -- --force
+```
 
 ## 📄 License
 
@@ -273,11 +232,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🙏 Acknowledgments
 
-- React team for the amazing framework
-- Redux Toolkit for simplified state management
-- Bootstrap team for the UI components
-- React Query for efficient data fetching
+- [React](https://reactjs.org/) for the amazing framework
+- [Vite](https://vitejs.dev/) for the fast build tool
+- [Bootstrap](https://getbootstrap.com/) for the UI components
+- [Redux Toolkit](https://redux-toolkit.js.org/) for state management
+- [React Query](https://tanstack.com/query) for data fetching
+- [SASS](https://sass-lang.com/) for advanced styling
 
 ---
 
-**TechMart is an educational project and a strong starting point for any modern e-commerce web application. Built with modern technologies and best practices, it provides a solid foundation for building real-world e-commerce solutions.**
+**Made with ❤️ by the TechMart Team**
