@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Col, Row, Form, Button, Alert } from "react-bootstrap";
 import ProductCard from "../ui/ProductCard";
 import PageLoader from "../ui/PageLoader";
-import SearchSuggestions from "../ui/SearchSuggestions";
+
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -201,11 +201,22 @@ export default function HomePage() {
               onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
               className="search-input"
             />
-            <SearchSuggestions
-              suggestions={suggestions}
-              onSelect={handleSearchSelect}
-              visible={showSuggestions}
-            />
+            {showSuggestions && suggestions.length > 0 && (
+              <div className="position-absolute w-100 bg-white border rounded shadow-sm" style={{ zIndex: 1000, top: '100%' }}>
+                {suggestions.map((suggestion, index) => (
+                  <div
+                    key={index}
+                    className="px-3 py-2 cursor-pointer hover-bg-light"
+                    onClick={() => handleSearchSelect(suggestion)}
+                    style={{ cursor: 'pointer' }}
+                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f8f9fa'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
+                  >
+                    {suggestion}
+                  </div>
+                ))}
+              </div>
+            )}
           </Form.Group>
         </Col>
         <Col md={2}>

@@ -1,0 +1,83 @@
+// Variables
+$primary-color: #282c34
+$secondary-color: #61dafb
+$white: #ffffff
+$black: #222
+$shadow: rgba(0, 0, 0, 0.125)
+$transition: all 0.3s ease
+
+// Mixins
+@mixin flex-center
+  display: flex
+  align-items: center
+  justify-content: center
+
+@mixin card-shadow
+  box-shadow: 0 2px 12px $shadow
+
+@mixin hover-effect
+  transition: $transition
+  &:hover
+    transform: translateY(-2px)
+
+// Global styles
+body, .App
+  background: $white !important
+  color: $black !important
+  min-height: 100vh
+
+.card, .product-detail-card
+  background: $white !important
+  color: $black !important
+  border: none
+  @include card-shadow
+
+.App-logo
+  height: 40vmin
+  pointer-events: none
+
+@media (prefers-reduced-motion: no-preference)
+  .App-logo
+    animation: App-logo-spin infinite 20s linear
+
+.App-header
+  background-color: $primary-color
+  min-height: 100vh
+  display: flex
+  flex-direction: column
+  @include flex-center
+  font-size: calc(10px + 2vmin)
+  color: $white
+
+.App-link
+  color: $secondary-color
+
+@keyframes App-logo-spin
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
+
+// Custom Navbar Styles
+.modern-navbar
+  transition: $transition
+  .nav-item
+    color: $white !important
+    font-weight: 500
+    transition: $transition
+    border-radius: 8px
+    padding: 8px 16px
+    @include hover-effect
+    &:hover
+      background: rgba($white, 0.2)
+      color: $white !important
+  .nav-text
+    color: $white
+    font-weight: 500
+  .cart-total
+    color: $white !important
+    font-weight: 600
+  .navbar-toggler
+    border-color: rgba($white, 0.5)
+  .navbar-toggler-icon
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") 
