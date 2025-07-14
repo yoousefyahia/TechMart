@@ -3,6 +3,7 @@ import { Container, Nav, Navbar, Badge, Dropdown, Form, Button } from "react-boo
 import { useSelector } from "react-redux";
 import { useState } from "react";
 import Footer from "./Footer";
+import ScrollToTop from "../ui/ScrollToTop";
 
 export default function AppLayout() {
   const cart = useSelector((state) => state.cart);
@@ -12,6 +13,7 @@ export default function AppLayout() {
 
   return (
     <>
+      <ScrollToTop />
       {/* Animated Background Bubbles */}
       <div className="animated-bg">
         <div className="bubble bubble1"></div>
