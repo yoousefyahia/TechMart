@@ -14,14 +14,6 @@ export default function AppLayout() {
   return (
     <>
       <ScrollToTop />
-      {/* Animated Background Bubbles */}
-      <div className="animated-bg">
-        <div className="bubble bubble1"></div>
-        <div className="bubble bubble2"></div>
-        <div className="bubble bubble3"></div>
-        <div className="bubble bubble4"></div>
-        <div className="bubble bubble5"></div>
-      </div>
       <Navbar bg="light" expand="lg" className="sticky-top modern-navbar shadow-sm" style={{ backdropFilter: 'blur(12px)', background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
         <Container>
           <Navbar.Brand as={Link} to="/" className="d-flex align-items-center brand-logo gap-2">

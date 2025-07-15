@@ -1,8 +1,8 @@
 import React from "react";
 import { Modal, Button, Row, Col, Image, Badge } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart } from "../rtk/slices/cartSlice";
-import Notification from "./Notification";
+import { addToCart } from "../../rtk/slices/cartSlice";
+import Notification from "../ui/Notification";
 import { useState } from "react";
 
 export default function ProductQuickView({ product, show, onHide }) {

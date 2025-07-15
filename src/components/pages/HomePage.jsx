@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { Col, Row, Form, Button, Alert } from "react-bootstrap";
 import ProductCard from "../ui/ProductCard";
 import PageLoader from "../ui/PageLoader";
+import ProductQuickView from "../features/ProductQuickView";
 
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
@@ -46,7 +47,20 @@ export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState(loadPreferences().selectedCategory);
   const [sortBy, setSortBy] = useState(loadPreferences().sortBy);
   const [priceRange, setPriceRange] = useState(loadPreferences().priceRange);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  // Quick View state
+  const [showQuickView, setShowQuickView] = useState(false);
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
+
+  const handleQuickView = (product) => {
+    setQuickViewProduct(product);
+    setShowQuickView(true);
+  };
+
+  const handleCloseQuickView = () => {
+    setShowQuickView(false);
+    setQuickViewProduct(null);
+  };
 
   // Debounce search term
   useEffect(() => {
@@ -79,41 +93,6 @@ export default function HomePage() {
   const prices = products.map(p => p.price);
   const minPrice = Math.min(...prices);
   const maxPrice = Math.max(...prices);
-
-  // Generate search suggestions
-  const generateSuggestions = () => {
-    if (!searchTerm || searchTerm.length < 2) return [];
-    
-    const suggestions = [];
-    const searchLower = searchTerm.toLowerCase();
-    
-    // Add category suggestions
-    categories.forEach(category => {
-      if (category !== "all" && category.toLowerCase().includes(searchLower)) {
-        suggestions.push(`Category: ${category}`);
-      }
-    });
-    
-    // Add brand suggestions
-    const brands = [...new Set(products.map(p => p.brand))];
-    brands.forEach(brand => {
-      if (brand && brand.toLowerCase().includes(searchLower)) {
-        suggestions.push(`Brand: ${brand}`);
-      }
-    });
-    
-    // Add price range suggestions
-    if (searchLower.includes('cheap') || searchLower.includes('low')) {
-      suggestions.push('Price: Under $50');
-    }
-    if (searchLower.includes('expensive') || searchLower.includes('high')) {
-      suggestions.push('Price: Over $100');
-    }
-    
-    return suggestions.slice(0, 5);
-  };
-
-  const suggestions = generateSuggestions();
 
   // Filter and sort products
   const filteredProducts = products
@@ -150,26 +129,6 @@ export default function HomePage() {
     setPriceRange({ min: "", max: "" });
   }, []);
 
-  const handleSearchSelect = (suggestion) => {
-    if (suggestion.startsWith('Category: ')) {
-      const category = suggestion.replace('Category: ', '');
-      setSelectedCategory(category);
-      setSearchTerm("");
-    } else if (suggestion.startsWith('Brand: ')) {
-      const brand = suggestion.replace('Brand: ', '');
-      setSearchTerm(brand);
-    } else if (suggestion.startsWith('Price: ')) {
-      const priceText = suggestion.replace('Price: ', '');
-      if (priceText.includes('Under $50')) {
-        setPriceRange({ min: "", max: "50" });
-      } else if (priceText.includes('Over $100')) {
-        setPriceRange({ min: "100", max: "" });
-      }
-      setSearchTerm("");
-    }
-    setShowSuggestions(false);
-  };
-
   if (loading && products.length === 0) {
     return <PageLoader />;
   }
@@ -195,28 +154,9 @@ export default function HomePage() {
               value={searchTerm}
               onChange={(e) => {
                 setSearchTerm(e.target.value);
-                setShowSuggestions(true);
               }}
-              onFocus={() => setShowSuggestions(true)}
-              onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
               className="search-input"
             />
-            {showSuggestions && suggestions.length > 0 && (
-              <div className="position-absolute w-100 bg-white border rounded shadow-sm" style={{ zIndex: 1000, top: '100%' }}>
-                {suggestions.map((suggestion, index) => (
-                  <div
-                    key={index}
-                    className="px-3 py-2 cursor-pointer hover-bg-light"
-                    onClick={() => handleSearchSelect(suggestion)}
-                    style={{ cursor: 'pointer' }}
-                    onMouseEnter={(e) => e.target.style.backgroundColor = '#f8f9fa'}
-                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
-                  >
-                    {suggestion}
-                  </div>
-                ))}
-              </div>
-            )}
           </Form.Group>
         </Col>
         <Col md={2}>
@@ -285,29 +225,24 @@ export default function HomePage() {
         </Col>
       </Row>
       {/* Products Grid */}
-      {filteredProducts.length === 0 ? (
-        <div className="text-center py-5">
-          <h3>No products found</h3>
-          <p className="text-muted">Try adjusting your search or filters</p>
-          <Button variant="primary" onClick={clearFilters}>
-            Clear All Filters
-          </Button>
-        </div>
-      ) : (
-        <div className="products-section">
-          <div className="section-header">
-            <h2 className="section-title">🛍️ All Products</h2>
-            <p className="section-subtitle">Browse our full collection</p>
-          </div>
-          <Row>
-            {filteredProducts.map((product) => (
-              <Col key={product.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
-                <ProductCard product={product} />
-              </Col>
-            ))}
-          </Row>
-        </div>
-      )}
+      <Row className="mt-4">
+        {filteredProducts.length === 0 ? (
+          <Col>
+            <Alert variant="info">No products found.</Alert>
+          </Col>
+        ) : (
+          filteredProducts.map(product => (
+            <Col key={product.id} xs={12} sm={6} md={4} lg={3} className="mb-4">
+              <ProductCard product={product} onQuickView={handleQuickView} />
+            </Col>
+          ))
+        )}
+      </Row>
+      <ProductQuickView 
+        product={quickViewProduct} 
+        show={showQuickView} 
+        onHide={handleCloseQuickView} 
+      />
     </div>
   );
 }

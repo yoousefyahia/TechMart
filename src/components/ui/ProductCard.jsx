@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import Notification from "./Notification";
 import LazyImage from "./LazyImage";
 
-const ProductCard = memo(({ product }) => {
+const ProductCard = memo(({ product, onQuickView }) => {
   const dispatch = useDispatch();
   const [showNotification, setShowNotification] = useState(false);
   
@@ -82,6 +82,16 @@ const ProductCard = memo(({ product }) => {
                 >
                   {product.stock === 0 ? 'Out of Stock' : 'Add To Cart'}
                 </Button>
+                {onQuickView && (
+                  <Button 
+                    variant="outline-secondary" 
+                    size="sm"
+                    className="ms-1"
+                    onClick={e => { e.preventDefault(); e.stopPropagation(); onQuickView(product); }}
+                  >
+                    Quick View
+                  </Button>
+                )}
               </div>
             </div>
           </Card.Body>
