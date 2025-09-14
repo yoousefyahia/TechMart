@@ -144,15 +144,6 @@ This creates a `build` folder with:
 - **AWS S3**: Upload build files to S3 bucket
 - **Traditional hosting**: Upload build files to your web server
 
-## 🔧 Configuration
-
-### Environment Variables
-Create a `.env` file in the root directory:
-
-```env
-VITE_API_URL=https://your-api-endpoint.com
-VITE_STORAGE_KEY=techmart_cart
-```
 
 ### Customization
 - **Styling**: Modify `src/App.sass` and `src/index.sass` for global styles
@@ -225,11 +216,6 @@ npm install
 # Clear build cache
 npm run build -- --force
 ```
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgments
 
 - [React](https://reactjs.org/) for the amazing framework
@@ -239,6 +225,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [React Query](https://tanstack.com/query) for data fetching
 - [SASS](https://sass-lang.com/) for advanced styling
 
----
-
-**Made with ❤️ by the TechMart Team**
