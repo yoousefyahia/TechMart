@@ -109,9 +109,6 @@ TechMart is a comprehensive e-commerce solution that demonstrates modern web dev
    npm run dev
    ```
 
-4. **Open your browser:**
-   Navigate to [http://localhost:3000](http://localhost:3000)
-
 ### Development Commands
 
 ```bash
